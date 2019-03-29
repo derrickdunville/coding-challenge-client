@@ -12,6 +12,7 @@ global.window = {innerWidth: 1000, innerHeight: 1080}
 
 console.log("NODE_ENV: ", process.env.NODE_ENV)
 console.log("API_URL: ", process.env.API_URL)
+console.log("PORT: ", process.env.PORT)
 
 const app = express();
 // We serve bundle.js for client and any other static asstets from the public directory
@@ -55,7 +56,7 @@ app.get('*', function(req, res, next) {
 });
 
 const server = http.createServer(app);
-server.listen(process.env.PORT || 8080, '0.0.0.0', function(err) {
+server.listen(process.env.PORT || 3000, '0.0.0.0', function(err) {
   if (err) throw err;
 
   const addr = server.address();
