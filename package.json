@@ -14,7 +14,7 @@
     "dev:build-server": "babel-node ./node_modules/webpack/bin/webpack --config ./webpack/webpack.server.dev.js --watch",
     "dev:build-client": "rm -rf ./public && babel-node ./node_modules/webpack/bin/webpack --config ./webpack/webpack.client.dev.js --watch",
     "build" : "NODE_ENV=production babel-node ./node_modules/webpack/bin/webpack --config ./webpack/webpack.client.prod.js --production && babel-node ./node_modules/webpack/bin/webpack --config ./webpack/webpack.server.prod.js --production",
-    "production": "node build/bundle.js"
+    "production": "babel-node build/bundle.js"
   },
   "engines": {
     "node": "8.15.0",
