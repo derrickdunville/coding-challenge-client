@@ -1,7 +1,9 @@
 import React from 'react'
 import App from '../layouts/App'
-import NotFoundPage from '../views/NotFoundPage'
+
 import HomePage from '../views/HomePage'
+import LinkPage from '../views/LinkPage.jsx'
+import NotFoundPage from '../views/NotFoundPage'
 
 export default [
   {
@@ -9,9 +11,12 @@ export default [
     routes: [
       {
         ...HomePage,
-        hidden: true,
         exact: true,
         path: '/',
+      },
+      {
+        ...LinkPage,
+        path: '/:link'
       },
       {
         ...NotFoundPage,

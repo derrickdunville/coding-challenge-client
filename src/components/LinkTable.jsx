@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,6 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import Button from '@material-ui/core/Button'
 
 let counter = 0;
 function createData(title, clicks) {
@@ -158,11 +160,20 @@ class EnhancedTable extends React.Component {
                         key={n._id}
                       >
                         <TableCell component="th" scope="row" padding="default">
-                          {n.title}
+                          <NavLink
+                            to={`/${n.title}`}
+                            key={n._id}
+                            >
+                            {n.title}
+                          </NavLink>
                         </TableCell>
                         <TableCell align="right">{n.clicks}</TableCell>
-                        <TableCell align="right">Edit</TableCell>
-                        <TableCell align="right">Delete</TableCell>
+                        <TableCell align="right">
+                          <Button color="default">Edit</Button>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button color="secondary">Delete</Button>
+                        </TableCell>
                       </TableRow>
                     );
                   })}
