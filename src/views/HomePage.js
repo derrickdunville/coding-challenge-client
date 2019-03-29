@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import { Helmet } from 'react-helmet'
-import logo from "../assets/img/reactlogo.png";
-import withStyles from "@material-ui/core/styles/withStyles";
-import homeStyle from "../assets/jss/views/homeStyle.jsx";
+import logo from "assets/img/reactlogo.png";
+import withStyles from "@material-ui/core/styles/withStyles"
+import homeStyle from "assets/jss/views/homeStyle.jsx"
 import queryString from 'query-string'
+
+import LinkForm from '../components/LinkForm.jsx'
 
 class Home extends Component {
   constructor(props) {
@@ -28,7 +30,10 @@ class Home extends Component {
     return (
       <div>
         {this.head()}
-        <h1>Welcome</h1>
+        <div style={{width: "100%", display: "flex", justifyContent: "center", textAlign: "center"}}>
+          <h1>Grow the web with referrals!</h1>
+        </div>
+        <LinkForm />
       </div>
     )
   }
