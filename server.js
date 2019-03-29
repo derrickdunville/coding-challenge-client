@@ -55,7 +55,7 @@ app.get('*', function(req, res, next) {
 });
 
 const server = http.createServer(app);
-server.listen(3000, 'localhost', function(err) {
+server.listen(80, 'localhost', function(err) {
   if (err) throw err;
 
   const addr = server.address();
