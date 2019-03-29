@@ -27,7 +27,7 @@ class LinkForm extends Component {
   handleSubmit(event){
     event.preventDefault()
     let link = {
-      title: this.state.title,
+      title: this.state.title.toLowerCase(),
     }
     this.props.postLink(link)
   }

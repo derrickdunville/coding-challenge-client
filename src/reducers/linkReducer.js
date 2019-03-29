@@ -4,7 +4,10 @@ import {
   POST_LINK_SUCCESS,
   GET_LINKS,
   GET_LINKS_SUCCESS,
-  GET_LINKS_FAIL
+  GET_LINKS_FAIL,
+  GET_LINK,
+  GET_LINK_SUCCESS,
+  GET_LINK_FAIL
 } from '../constants/link-action-types'
 
 const initialState = {
@@ -48,6 +51,26 @@ export default (state=initialState, action) => {
         ...state,
         gettingLinks: false,
         loaded: true
+      }
+    case GET_LINK:
+      return {
+        ...state,
+        gettingLink: true,
+      }
+    case GET_LINK_SUCCESS:
+      return {
+        ...state,
+        gettingLink:false,
+        loaded: true,
+        link: action.payload.data
+      }
+    case GET_LINK_FAIL:
+      return {
+        ...state,
+        gettingLink: false,
+        loaded: true,
+        getLinkErrorMessage: action.payload.data.err.message,
+        linkStatus: action.payload.status
       }
     default:
       return state

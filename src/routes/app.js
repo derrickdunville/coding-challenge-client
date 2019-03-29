@@ -16,7 +16,7 @@ export default [
       },
       {
         ...LinkPage,
-        path: '/:link'
+        path: '/:title'
       },
       {
         ...NotFoundPage,
