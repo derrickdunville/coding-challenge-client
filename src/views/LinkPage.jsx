@@ -8,7 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles"
 import homeStyle from "assets/jss/views/homeStyle.jsx"
 import queryString from 'query-string'
 
-import { getLink } from '../actions/linkActions'
+import { getLink, clearLink } from '../actions/linkActions'
 
 class LinkPage extends Component {
   constructor(props) {
@@ -20,6 +20,9 @@ class LinkPage extends Component {
     if(!this.props.link || this.props.link.title != this.props.match.params.title){
       this.props.getLink(this.props.match.params.title)
     }
+  }
+  componentWillUnmount(){
+    this.props.clearLink()
   }
 
   head(){
@@ -43,7 +46,13 @@ class LinkPage extends Component {
             <h1>Ambassador</h1>
           </div>
         ):(
-          <h1>Ooops, 404!</h1>
+          <div>
+            {this.props.linkStatus == 404 ? (
+              <h1>Ooops, 404!</h1>
+            ):(
+              <div></div>
+            )}
+          </div>
         )}
       </div>
     )
@@ -65,5 +74,5 @@ function loadData(store, match, query, url, referring_url){
 
 export default {
   loadData,
-  component: connect(mapStateToProps, { getLink })(withRouter(withStyles(homeStyle)(LinkPage)))
+  component: connect(mapStateToProps, { getLink, clearLink })(withRouter(withStyles(homeStyle)(LinkPage)))
 }

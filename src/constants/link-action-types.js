@@ -9,3 +9,5 @@ export const GET_LINKS_FAIL = "GET_LINKS_FAIL"
 export const GET_LINK = "GET_LINK"
 export const GET_LINK_SUCCESS = "GET_LINK_SUCCESS"
 export const GET_LINK_FAIL = "GET_LINK_FAIL"
+
+export const CLEAR_LINK = "CLEAR_LINK"

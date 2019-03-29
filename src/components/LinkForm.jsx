@@ -55,6 +55,7 @@ class LinkForm extends Component {
             <Button
               style={{width: '100px', marginLeft: "15px", height: '56px'}}
               color="primary"
+              variant="outlined"
               onClick={this.handleSubmit}
               >
               Add

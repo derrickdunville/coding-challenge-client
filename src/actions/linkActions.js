@@ -45,3 +45,7 @@ export const getLink = (title) => async (dispatch, getState, api) => {
      })
   }
 }
+
+export const clearLink = () => async (dispatch, getState, api) => {
+  dispatch({ type: types.CLEAR_LINK })
+}

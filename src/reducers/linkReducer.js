@@ -7,7 +7,8 @@ import {
   GET_LINKS_FAIL,
   GET_LINK,
   GET_LINK_SUCCESS,
-  GET_LINK_FAIL
+  GET_LINK_FAIL,
+  CLEAR_LINK
 } from '../constants/link-action-types'
 
 const initialState = {
@@ -72,6 +73,12 @@ export default (state=initialState, action) => {
         getLinkErrorMessage: action.payload.data.err.message,
         linkStatus: action.payload.status
       }
+    case CLEAR_LINK:
+      let newState = {...state}
+      delete newState.link
+      delete newState.linkStatus
+      delete newState.getLinkErrorMessage
+      return newState
     default:
       return state
   }
