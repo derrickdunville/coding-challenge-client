@@ -55,7 +55,7 @@ app.get('*', function(req, res, next) {
 });
 
 const server = http.createServer(app);
-server.listen(8080, 'localhost', function(err) {
+server.listen(process.env.PORT || 8080, function(err) {
   if (err) throw err;
 
   const addr = server.address();
