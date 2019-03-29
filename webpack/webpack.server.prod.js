@@ -13,7 +13,7 @@ module.exports = merge(common,
       new webpack.DefinePlugin({ // <-- key to reducing React's size
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
-          PORT: JSON.stringify(process.env.PORT)
+          PORT: JSON.stringify(process.env.PORT || 3000)
         }
       }),
       new CompressionPlugin({
