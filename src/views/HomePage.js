@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import { withRouter } from 'react-router'
 import { Helmet } from 'react-helmet'
 import logo from "assets/img/reactlogo.png";
@@ -7,6 +9,8 @@ import homeStyle from "assets/jss/views/homeStyle.jsx"
 import queryString from 'query-string'
 
 import LinkForm from '../components/LinkForm.jsx'
+import LinkTable from '../components/LinkTable.jsx'
+import { getLinks } from '../actions/linkActions'
 
 class Home extends Component {
   constructor(props) {
@@ -14,7 +18,9 @@ class Home extends Component {
   }
 
   componentDidMount(){
-
+    if(!this.props.links.loaded){
+      this.props.getLinks()
+    }
   }
 
   head(){
@@ -34,17 +40,26 @@ class Home extends Component {
           <h1>Grow the web with referrals!</h1>
         </div>
         <LinkForm />
+        <LinkTable data={this.props.links.docs || []}/>
       </div>
     )
+  }
+}
+
+
+function mapStateToProps(state) {
+  return {
+    links: state.links
   }
 }
 
 function loadData(store, match, query, url, referring_url){
   console.log("home page load data: ", query)
   console.dir(query)
+  return store.dispatch(getLinks())
 }
 
 export default {
   loadData,
-  component: withRouter(withStyles(homeStyle)(Home))
+  component: connect(mapStateToProps, { getLinks })(withRouter(withStyles(homeStyle)(Home)))
 }

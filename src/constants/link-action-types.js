@@ -1,3 +1,7 @@
 export const POST_LINK = "POST_LINK"
 export const POST_LINK_SUCCESS = "POST_LINK_SUCCESS"
 export const POST_LINK_FAIL = "POST_LINK_FAIL"
+
+export const GET_LINKS = "GET_LINKS"
+export const GET_LINKS_SUCCESS = "GET_LINKS_SUCCESS"
+export const GET_LINKS_FAIL = "GET_LINKS_FAIL"
