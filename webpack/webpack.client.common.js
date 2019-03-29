@@ -13,6 +13,7 @@ const definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.NODE_ENV === 'development' || 'true')),
   'process.env': {
     API_URL: JSON.stringify(process.env.API_URL || 'http://localhost:3001/'),
+    PORT: JSON.stringify(process.env.PORT)
   }
 });
 
