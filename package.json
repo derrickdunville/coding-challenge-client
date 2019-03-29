@@ -15,6 +15,10 @@
     "dev:build-client": "rm -rf ./public && babel-node ./node_modules/webpack/bin/webpack --config ./webpack/webpack.client.dev.js --watch",
     "production": "NODE_ENV=production babel-node ./node_modules/webpack/bin/webpack --config ./webpack/webpack.client.prod.js --production && babel-node ./node_modules/webpack/bin/webpack --config ./webpack/webpack.server.prod.js --production && node build/bundle.js"
   },
+  "engines": {
+    "node": "8.15.0",
+    "npm": "6.4.1"
+  },
   "dependencies": {
     "@material-ui/core": "3.9.1",
     "@material-ui/icons": "3.0.1",

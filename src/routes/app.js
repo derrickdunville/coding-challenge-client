@@ -10,6 +10,7 @@ export default [
       {
         ...HomePage,
         hidden: true,
+        exact: true,
         path: '/',
       },
       {
