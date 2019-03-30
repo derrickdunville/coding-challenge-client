@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 import { withRouter } from 'react-router'
 import { Helmet } from 'react-helmet'
@@ -42,7 +43,7 @@ class LinkPage extends Component {
           <div>
             <h1>{this.props.link.title.charAt(0).toUpperCase() + this.props.link.title.slice(1)} are awesome!</h1>
             <h2>Come join Tim's World Wide Web!</h2>
-            <img src={logo}/>
+            <NavLink to="/"><img src={logo}/></NavLink>
             <h1>Ambassador</h1>
           </div>
         ):(

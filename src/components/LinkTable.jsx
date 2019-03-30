@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -16,6 +17,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import Button from '@material-ui/core/Button'
+import { deleteLink } from '../actions/linkActions'
 
 let counter = 0;
 function createData(title, clicks) {
@@ -129,6 +131,13 @@ class EnhancedTable extends React.Component {
     orderBy: 'title'
   };
 
+  handleDeleteLink = (event, property) => {
+    const title = property
+     // console.log(title)
+    console.dir(event.currentTarget.title)
+    this.props.deleteLink(event.currentTarget.title)
+  }
+
   handleRequestSort = (event, property) => {
     const orderBy = property;
     let order = 'desc';
@@ -172,7 +181,9 @@ class EnhancedTable extends React.Component {
                           <Button color="default">Edit</Button>
                         </TableCell>
                         <TableCell align="right">
-                          <Button color="secondary">Delete</Button>
+                          <Button color="secondary" title={n.title} onClick={this.handleDeleteLink}>
+                            Delete
+                          </Button>
                         </TableCell>
                       </TableRow>
                     );
@@ -186,9 +197,15 @@ class EnhancedTable extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+
+  }
+}
+
 EnhancedTable.propTypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(EnhancedTable);
+export default connect(mapStateToProps, { deleteLink })(withStyles(styles)(EnhancedTable));

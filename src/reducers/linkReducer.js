@@ -8,7 +8,10 @@ import {
   GET_LINK,
   GET_LINK_SUCCESS,
   GET_LINK_FAIL,
-  CLEAR_LINK
+  CLEAR_LINK,
+  DELETE_LINK,
+  DELETE_LINK_SUCCESS,
+  DELETE_LINK_FAIL
 } from '../constants/link-action-types'
 
 const initialState = {
@@ -79,7 +82,38 @@ export default (state=initialState, action) => {
       delete newState.linkStatus
       delete newState.getLinkErrorMessage
       return newState
+    case DELETE_LINK:
+      return {
+        ...state,
+        deletingLink: true
+      }
+    case DELETE_LINK_SUCCESS:
+      return {
+        ...state,
+        deletingLink: false,
+        docs: deleteLinkFromDocs(state.docs, action)
+      }
+    case DELETE_LINK_FAIL:
+      return {
+        ...state,
+        deletingLink: false
+      }
     default:
       return state
+  }
+}
+
+function deleteLinkFromDocs(docs, action){
+  let target_index = -1
+  for(let i = 0; i < docs.length; ++i){
+    if(docs[i].title == action.payload){
+      target_index = i
+      break
+    }
+  }
+  if(target_index > -1){
+    return ([...docs.slice(0, target_index), ...docs.slice(target_index + 1)])
+  } else {
+    return ([...docs])
   }
 }

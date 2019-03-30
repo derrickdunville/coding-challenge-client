@@ -49,3 +49,23 @@ export const getLink = (title) => async (dispatch, getState, api) => {
 export const clearLink = () => async (dispatch, getState, api) => {
   dispatch({ type: types.CLEAR_LINK })
 }
+
+export const deleteLink = (title) => async (dispatch, getState, api) => {
+  dispatch({
+    type: types.DELETE_LINK
+  })
+  try {
+    const res = await api.delete(`/links/${title}`)
+    dispatch({
+      type: types.DELETE_LINK_SUCCESS,
+      payload: title
+    })
+  } catch (error) {
+    console.log("Why is this hitting")
+    console.dir(error)
+    dispatch({
+      type: types.DELETE_LINK_FAIL,
+       payload: error.response
+     })
+  }
+}
