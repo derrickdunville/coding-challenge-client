@@ -50,6 +50,24 @@ export const clearLink = () => async (dispatch, getState, api) => {
   dispatch({ type: types.CLEAR_LINK })
 }
 
+export const putLink = (title, newTitle) => async (dispatch, getState, api) => {
+  dispatch({
+    type: types.PUT_LINK
+  })
+  try {
+    const res = await api.put(`/links/${title}`, {title: newTitle})
+    dispatch({
+      type: types.PUT_LINK_SUCCESS,
+      payload: res
+    })
+  } catch (error) {
+    dispatch({
+      type: types.PUT_LINK_FAIL,
+       payload: error.response
+     })
+  }
+}
+
 export const deleteLink = (title) => async (dispatch, getState, api) => {
   dispatch({
     type: types.DELETE_LINK
@@ -61,8 +79,6 @@ export const deleteLink = (title) => async (dispatch, getState, api) => {
       payload: title
     })
   } catch (error) {
-    console.log("Why is this hitting")
-    console.dir(error)
     dispatch({
       type: types.DELETE_LINK_FAIL,
        payload: error.response

@@ -73,5 +73,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps,
-  { postLink })(LinkForm)
+export default connect(mapStateToProps, { postLink })(LinkForm)

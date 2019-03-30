@@ -9,6 +9,9 @@ import {
   GET_LINK_SUCCESS,
   GET_LINK_FAIL,
   CLEAR_LINK,
+  PUT_LINK,
+  PUT_LINK_SUCCESS,
+  PUT_LINK_FAIL,
   DELETE_LINK,
   DELETE_LINK_SUCCESS,
   DELETE_LINK_FAIL
@@ -82,6 +85,22 @@ export default (state=initialState, action) => {
       delete newState.linkStatus
       delete newState.getLinkErrorMessage
       return newState
+    case PUT_LINK:
+      return {
+        ...state,
+        puttingLink: true
+      }
+    case PUT_LINK_SUCCESS:
+      return {
+        ...state,
+        puttingLink: false,
+        docs: state.docs.map(link => (link._id === action.payload.data._id) ? action.payload.data : link)
+      }
+    case PUT_LINK_FAIL:
+      return {
+        ...state,
+        puttingLink: false
+      }
     case DELETE_LINK:
       return {
         ...state,
@@ -101,6 +120,21 @@ export default (state=initialState, action) => {
     default:
       return state
   }
+}
+function updateLinkInDocs(docs, updatedLink){
+
+  // let target_index = -1
+  // for(let i = 0; i < docs.length; ++i){
+  //   if(docs[i]._id == updatedLink._id){
+  //     target_index = 1
+  //     break
+  //   }
+  // }
+  // if(target_index > -1){
+  //   return ([...docs.slice(0,target_index), updatedLink, ...docs.slice(target_index + 1)])
+  // } else {
+  //   return ([...docs])
+  // }
 }
 
 function deleteLinkFromDocs(docs, action){

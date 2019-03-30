@@ -18,12 +18,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import Button from '@material-ui/core/Button'
 import { deleteLink } from '../actions/linkActions'
+import EditDialog from '../components/EditDialog.jsx'
 
-let counter = 0;
-function createData(title, clicks) {
-  counter += 1;
-  return { id: counter, title, clicks };
-}
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -178,7 +174,7 @@ class EnhancedTable extends React.Component {
                         </TableCell>
                         <TableCell align="right">{n.clicks}</TableCell>
                         <TableCell align="right">
-                          <Button color="default">Edit</Button>
+                          <EditDialog link={n} />
                         </TableCell>
                         <TableCell align="right">
                           <Button color="secondary" title={n.title} onClick={this.handleDeleteLink}>
