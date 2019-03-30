@@ -38,6 +38,8 @@ export const getLink = (title) => async (dispatch, getState, api) => {
       type: types.GET_LINK_SUCCESS,
       payload: res
     })
+    const click_res = await api.post('/click/' + title)
+    console.dir(click_res)
   } catch (error) {
     dispatch({
       type: types.GET_LINK_FAIL,

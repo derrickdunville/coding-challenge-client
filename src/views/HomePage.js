@@ -18,9 +18,9 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    if(!this.props.links.loaded){
+    // if(!this.props.links.loaded){
       this.props.getLinks()
-    }
+    // }
   }
 
   head(){

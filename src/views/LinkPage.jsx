@@ -28,7 +28,7 @@ class LinkPage extends Component {
 
   head(){
     return (
-      <Helmet key={this.props.location} title={"Ambassador Code Challenge!"} meta={[
+      <Helmet key={this.props.location} title={this.props.link ? (this.props.link.title.charAt(0).toUpperCase() + this.props.link.title.slice(1)) : "404 Not Found"} meta={[
           {name: "description", content: "This website was made by Derrick Dunville to solve an inteview coding challange for Ambassador."}
         ]}/>
     )

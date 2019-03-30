@@ -121,21 +121,6 @@ export default (state=initialState, action) => {
       return state
   }
 }
-function updateLinkInDocs(docs, updatedLink){
-
-  // let target_index = -1
-  // for(let i = 0; i < docs.length; ++i){
-  //   if(docs[i]._id == updatedLink._id){
-  //     target_index = 1
-  //     break
-  //   }
-  // }
-  // if(target_index > -1){
-  //   return ([...docs.slice(0,target_index), updatedLink, ...docs.slice(target_index + 1)])
-  // } else {
-  //   return ([...docs])
-  // }
-}
 
 function deleteLinkFromDocs(docs, action){
   let target_index = -1
