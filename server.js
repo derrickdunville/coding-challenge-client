@@ -18,7 +18,7 @@ const app = express();
 // We serve bundle.js for client and any other static asstets from the public directory
 app.use(express.static('public'))
 // Client side api calls need to be proxied to the api
-app.use('/api', proxy('http://127.0.0.1:3001'))
+app.use('/api', proxy(process.env.API_URL || 'http://127.0.0.1:3001'))
 
 app.get('*', function(req, res, next) {
 
