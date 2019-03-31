@@ -3,17 +3,11 @@ import { connect } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
 import favicon from '../assets/img/favicon.ico'
 
-
 class App extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount(){
 
-  }
-  componentDidUpdate(prevProps, prevState){
-
-  }
   render(){
     const { route, ...rest } = this.props;
     return (
@@ -24,16 +18,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state){
-  return {
-  }
-}
-
-function loadData(store){
-  return
-}
-
-export default {
-  component: connect(mapStateToProps, { })(App),
-  loadData
-}
+export default {component: App}

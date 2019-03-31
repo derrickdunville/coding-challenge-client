@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import { withRouter } from 'react-router'
 import { Helmet } from 'react-helmet'
 import logo from "assets/img/reactlogo.png";
 import withStyles from "@material-ui/core/styles/withStyles"
 import homeStyle from "assets/jss/views/homeStyle.jsx"
 import queryString from 'query-string'
-
 import LinkForm from '../components/LinkForm.jsx'
 import LinkTable from '../components/LinkTable.jsx'
 import { getLinks } from '../actions/linkActions'
@@ -18,9 +16,7 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    // if(!this.props.links.loaded){
-      this.props.getLinks()
-    // }
+    this.props.getLinks()
   }
 
   head(){
@@ -46,7 +42,6 @@ class Home extends Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
     links: state.links
@@ -54,7 +49,6 @@ function mapStateToProps(state) {
 }
 
 function loadData(store, match, query, url, referring_url){
-  console.log("home page load data: ", query)
   return store.dispatch(getLinks())
 }
 

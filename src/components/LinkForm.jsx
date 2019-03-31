@@ -1,14 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import withStyles from '@material-ui/core/styles/withStyles'
-import formStyle from 'assets/jss/components/formStyle.jsx'
-
-import {
-  postLink
-} from 'actions/linkActions'
+import { postLink } from 'actions/linkActions'
 
 class LinkForm extends Component {
   constructor(props) {

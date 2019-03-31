@@ -3,7 +3,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { createHashHistory } from "history";
-// eslint-disable-next-line no-sync
 import Server from './Server'
 import { SheetsRegistry } from 'jss'
 import JssProvider from 'react-jss/lib/JssProvider'
@@ -56,7 +55,6 @@ function renderApp(req, store, context) {
         <meta name="theme-color" content="#000000">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Orbitron" />
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
       </head>
       <body>

@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-
 import { withRouter } from 'react-router'
 import { Helmet } from 'react-helmet'
 import logo from "assets/img/ambassador.png";
 import withStyles from "@material-ui/core/styles/withStyles"
 import homeStyle from "assets/jss/views/homeStyle.jsx"
 import queryString from 'query-string'
-
 import { getLink, clearLink } from '../actions/linkActions'
 
 class LinkPage extends Component {
@@ -17,7 +15,6 @@ class LinkPage extends Component {
   }
 
   componentDidMount(){
-    // get the link. we'll pass history to the action. if the action return 404 we will show page not found
     if(!this.props.link || this.props.link.title != this.props.match.params.title){
       this.props.getLink(this.props.match.params.title)
     }
@@ -48,11 +45,7 @@ class LinkPage extends Component {
           </div>
         ):(
           <div>
-            {this.props.linkStatus == 404 ? (
-              <h1>Ooops, 404!</h1>
-            ):(
-              <div></div>
-            )}
+            {this.props.linkStatus == 404 ? (<h1>Ooops, 404!</h1>):(<div></div>)}
           </div>
         )}
       </div>
@@ -68,8 +61,6 @@ function mapStateToProps(state) {
 }
 
 function loadData(store, match, query, url, referring_url){
-  console.log("link page load data: ", query)
-  // console.dir(query)
   return store.dispatch(getLink(match.params.title))
 }
 
