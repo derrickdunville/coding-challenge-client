@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
+import favicon from '../assets/img/favicon.ico'
+
 
 class App extends Component {
   constructor(props) {

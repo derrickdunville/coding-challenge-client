@@ -69,7 +69,7 @@ function mapStateToProps(state) {
 
 function loadData(store, match, query, url, referring_url){
   console.log("link page load data: ", query)
-  console.dir(query)
+  // console.dir(query)
   return store.dispatch(getLink(match.params.title))
 }
 

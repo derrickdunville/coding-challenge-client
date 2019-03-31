@@ -39,7 +39,6 @@ app.get('*', function(req, res, next) {
 
     // Wait for all the loadData promises to complete before rendering
     Promise.all(promises).then(() => {
-
       // we use context to check if we need to update the res.status to 404 and for redirects/ navigation changes
       const context = {}
       const content = renderApp(req, store, context)

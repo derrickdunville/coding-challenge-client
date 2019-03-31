@@ -57,6 +57,7 @@ function renderApp(req, store, context) {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Orbitron" />
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
       </head>
       <body>
         <div id="root">${rendered}</div>

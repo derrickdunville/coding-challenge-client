@@ -27,6 +27,10 @@ module.exports = {
       {
         test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
         loaders: ["file-loader"]
+      },
+      {
+        test: /\.(ico)$/,
+        loader: 'file-loader?name=[name].[ext]'  // <-- retain original file name
       }
     ]
   }
