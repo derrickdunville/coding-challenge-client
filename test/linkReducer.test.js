@@ -27,6 +27,19 @@ const loadedLinkState = {
   link: mockData[0],
 }
 
+const alreadyExistsError = {
+  err: {
+    type: "ValidationError",
+    message: "link already exists"
+  }
+}
+const notFoundError = {
+  err: {
+    type: "NotFound",
+    message: "link not found"
+  }
+}
+
 describe('links reducer', () => {
   it('should return the initial state', () => {
     expect(linkReducer(undefined, {})).toEqual(
@@ -54,6 +67,18 @@ describe('links reducer', () => {
       ...initialState,
       postingLink: false,
       docs: [...initialState.docs, mockData[0]]
+    })
+  })
+  it('POST_LINK_FAIL', () => {
+    expect(
+      linkReducer(initialState, {
+        type: types.POST_LINK_FAIL,
+        payload: alreadyExistsError
+      })
+    ).toEqual({
+      ...initialState,
+      postingLink: false,
+      postLinkErrorMessage: alreadyExistsError.err.message
     })
   })
 
@@ -103,6 +128,18 @@ describe('links reducer', () => {
       link: mockData[0]
     })
   })
+  it('GET_LINK_FAIL', () => {
+    expect(
+      linkReducer(initialState, {
+        type: types.GET_LINK_FAIL,
+        payload: notFoundError
+      })
+    ).toEqual({
+      ...initialState,
+      gettingLink: false,
+      getLinkErrorMessage: notFoundError.err.message
+    })
+  })
 
   it('PUT_LINK', () => {
     expect(
@@ -132,6 +169,18 @@ describe('links reducer', () => {
       }]
     })
   })
+  it('PUT_LINK_FAIL', () => {
+    expect(
+      linkReducer(loadedState, {
+        type: types.PUT_LINK_FAIL,
+        payload: alreadyExistsError
+      })
+    ).toEqual({
+      ...loadedState,
+      puttingLink: false,
+      putLinkErrorMessage: alreadyExistsError.err.message
+    })
+  })
 
   it('DELETE_LINK', () => {
     expect(
@@ -156,6 +205,18 @@ describe('links reducer', () => {
       ...loadedState,
       deletingLink: false,
       docs: []
+    })
+  })
+  it('DELETE_LINK_FAIL', () => {
+    expect(
+      linkReducer(loadedState, {
+        type: types.DELETE_LINK_FAIL,
+        payload: notFoundError
+      })
+    ).toEqual({
+      ...loadedState,
+      deletingLink: false,
+      deleteLinkErrorMessage: notFoundError.err.message
     })
   })
 

@@ -75,7 +75,7 @@ export default (state=initialState, action) => {
         ...state,
         gettingLink: false,
         getLinkErrorMessage: action.payload.err.message,
-        linkStatus: action.payload.status
+        // linkStatus: action.payload.status
       }
     case CLEAR_LINK:
       let newState = {...state}
@@ -97,7 +97,8 @@ export default (state=initialState, action) => {
     case PUT_LINK_FAIL:
       return {
         ...state,
-        puttingLink: false
+        puttingLink: false,
+        putLinkErrorMessage: action.payload.err.message
       }
     case DELETE_LINK:
       return {
@@ -113,7 +114,8 @@ export default (state=initialState, action) => {
     case DELETE_LINK_FAIL:
       return {
         ...state,
-        deletingLink: false
+        deletingLink: false,
+        deleteLinkErrorMessage: action.payload.err.message
       }
     default:
       return state

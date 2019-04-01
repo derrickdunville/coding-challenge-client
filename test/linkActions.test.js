@@ -10,8 +10,16 @@ import expect from 'expect'
 
 const middlewares = [thunk.withExtraArgument(mockAxios)]
 const mockStore = configureMockStore(middlewares)
+const mockData =
+  [
+    {
+      "clicks": 4,
+      "id": "5ca0a2198b782f09b2cabb0e",
+      "title": "example"
+    }
+  ]
 
-describe('link async actions', () => {
+describe('async linkActions', () => {
   var store = null
   beforeEach(() => {
     store = mockStore(
@@ -23,17 +31,9 @@ describe('link async actions', () => {
       }
     )
   })
-  const mockData =
-    [
-      {
-        "clicks": 4,
-        "id": "5ca0a2198b782f09b2cabb0e",
-        "title": "example"
-      }
-    ]
 
   // getLinks() list
-  it('GET_LINKS_SUCCESS when getting links has been done ', () => {
+  it('getLinks()', () => {
     mockAxios.get.mockImplementationOnce(() =>
       Promise.resolve({data: mockData })
     )
@@ -47,7 +47,7 @@ describe('link async actions', () => {
   })
 
   // getLink(title)
-  it('GET_LINK_SUCCESS when getting link has been done ', () => {
+  it('getLink(title)', () => {
     mockAxios.get.mockImplementationOnce(() =>
       Promise.resolve({data: mockData[0] })
     )
@@ -61,7 +61,7 @@ describe('link async actions', () => {
   })
 
   // postLink(title)
-  it('POST_LINK_SUCCESS when posting a link has been done ', () => {
+  it('postLink(title)', () => {
     mockAxios.post.mockImplementationOnce(() =>
       Promise.resolve({data: mockData[0]})
     )
@@ -75,7 +75,7 @@ describe('link async actions', () => {
   })
 
   // putLink(title, newTitle)
-  it('PUT_LINK_SUCCESS when putting a link has been done ', () => {
+  it('putLink(title, newTitle) success', () => {
     mockAxios.put.mockImplementationOnce(() =>
       Promise.resolve({data: mockData[0]})
     )
@@ -89,7 +89,7 @@ describe('link async actions', () => {
   })
 
   // deleteLink(title)
-  it('DELETE_LINK_SUCCESS when putting a link has been done ', () => {
+  it('deleteLink(title) success', () => {
     mockAxios.delete.mockImplementationOnce(() =>
       Promise.resolve({data: { message: "link successfully deleted" } })
     )
@@ -103,7 +103,7 @@ describe('link async actions', () => {
   })
 
   // clearLink()
-  it('CLEAR_LINK when clearLink has been done ', () => {
+  it('clearLink() success', () => {
     const expectedActions = [
       { type: types.CLEAR_LINK }
     ]
