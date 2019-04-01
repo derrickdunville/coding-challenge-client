@@ -33,13 +33,13 @@ export default (state=initialState, action) => {
       return {
         ...state,
         postingLink: false,
-        docs: [action.payload.data, ...state.docs]
+        docs: [action.payload, ...state.docs]
       }
     case POST_LINK_FAIL:
       return {
         ...state,
         postingLink: false,
-        postLinkErrorMessage: action.payload.data.err.message
+        postLinkErrorMessage: action.payload.err.message
       }
     case GET_LINKS:
       return {
@@ -51,7 +51,7 @@ export default (state=initialState, action) => {
         ...state,
         gettingLinks:false,
         loaded: true,
-        docs: action.payload.data
+        docs: action.payload
       }
     case GET_LINKS_FAIL:
       return {
@@ -68,15 +68,13 @@ export default (state=initialState, action) => {
       return {
         ...state,
         gettingLink:false,
-        loaded: true,
-        link: action.payload.data
+        link: action.payload
       }
     case GET_LINK_FAIL:
       return {
         ...state,
         gettingLink: false,
-        loaded: true,
-        getLinkErrorMessage: action.payload.data.err.message,
+        getLinkErrorMessage: action.payload.err.message,
         linkStatus: action.payload.status
       }
     case CLEAR_LINK:
@@ -94,7 +92,7 @@ export default (state=initialState, action) => {
       return {
         ...state,
         puttingLink: false,
-        docs: state.docs.map(link => (link._id === action.payload.data._id) ? action.payload.data : link)
+        docs: state.docs.map(link => (link._id === action.payload._id) ? action.payload : link)
       }
     case PUT_LINK_FAIL:
       return {
@@ -110,7 +108,7 @@ export default (state=initialState, action) => {
       return {
         ...state,
         deletingLink: false,
-        docs: deleteLinkFromDocs(state.docs, action)
+        docs: deleteLinkFromDocs(state.docs, action.payload)
       }
     case DELETE_LINK_FAIL:
       return {
@@ -122,10 +120,10 @@ export default (state=initialState, action) => {
   }
 }
 
-function deleteLinkFromDocs(docs, action){
+function deleteLinkFromDocs(docs, payload){
   let target_index = -1
   for(let i = 0; i < docs.length; ++i){
-    if(docs[i].title == action.payload){
+    if(docs[i].title == payload.title){
       target_index = i
       break
     }

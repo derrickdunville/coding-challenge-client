@@ -15,6 +15,16 @@ This environment is for testing server side rendering.
 http://localhost:3000
 
 ### Production
+`npm run build`
+Will build the client and server for production.
+
 `npm run production`
-Will build the client and server for production and will start the production server.
-http://localhost:3000
+Will will start the production server.
+
+## Testing
+`npm run test` will run the test suites.
+
+## Delpoyment
+`http://ambassador.derrickdunville.com`
+
+Is currently where the production application is deployed.

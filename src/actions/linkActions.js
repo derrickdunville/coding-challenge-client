@@ -4,23 +4,26 @@ export const postLink = (link) => async (dispatch, getState, api) =>{
   dispatch({ type: types.POST_LINK })
   try {
     const res = await api.post('/links', link)
-    dispatch({ type: types.POST_LINK_SUCCESS, payload: res })
+    dispatch({ type: types.POST_LINK_SUCCESS, payload: res.data })
   } catch (error) {
     dispatch({ type: types.POST_LINK_FAIL, payload: error.response })
   }
 }
 
 export const getLinks = () => async (dispatch, getState, api) => {
+  // console.dir(api)
   dispatch({
     type: types.GET_LINKS
   })
   try {
     const res = await api.get('/links')
+    // console.dir(res.data)
     dispatch({
       type: types.GET_LINKS_SUCCESS,
-      payload: res
+      payload: res.data
     })
   } catch (error) {
+    // console.dir(error)
     dispatch({
       type: types.GET_LINKS_FAIL,
        payload: error.response
@@ -36,7 +39,7 @@ export const getLink = (title) => async (dispatch, getState, api) => {
     const res = await api.get(`/links/${title}`)
     dispatch({
       type: types.GET_LINK_SUCCESS,
-      payload: res
+      payload: res.data
     })
     const click_res = await api.post('/click/' + title)
   } catch (error) {
@@ -59,7 +62,7 @@ export const putLink = (title, newTitle) => async (dispatch, getState, api) => {
     const res = await api.put(`/links/${title}`, {title: newTitle})
     dispatch({
       type: types.PUT_LINK_SUCCESS,
-      payload: res
+      payload: res.data
     })
   } catch (error) {
     dispatch({
@@ -77,7 +80,7 @@ export const deleteLink = (title) => async (dispatch, getState, api) => {
     const res = await api.delete(`/links/${title}`)
     dispatch({
       type: types.DELETE_LINK_SUCCESS,
-      payload: title
+      payload: res.data
     })
   } catch (error) {
     dispatch({
