@@ -8,6 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles"
 import homeStyle from "assets/jss/views/homeStyle.jsx"
 import queryString from 'query-string'
 import { getLink, clearLink } from '../actions/linkActions'
+import NotFoundPage from '../views/NotFoundPage'
 
 class LinkPage extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class LinkPage extends Component {
 
   head(){
     return (
-      <Helmet key={this.props.location} title={this.props.link ? (this.props.link.title.charAt(0).toUpperCase() + this.props.link.title.slice(1)) : "404 Not Found"} meta={[
+      <Helmet key={this.props.location} title={this.props.link ? (this.props.link.title.charAt(0).toUpperCase() + this.props.link.title.slice(1)) : ""} meta={[
           {name: "description", content: "This website was made by Derrick Dunville to solve an inteview coding challange for Ambassador."}
         ]}/>
     )
@@ -35,9 +36,9 @@ class LinkPage extends Component {
     const { classes, route, ...rest } = this.props;
     return (
       <div style={{width: "100%", display: "flex", justifyContent: "center", textAlign: "center"}}>
-        {this.head()}
-        {this.props.link && this.props.linkStatus != 404 ? (
+        {this.props.link && !this.props.getLinkErrorMessage ? (
           <div>
+            {this.head()}
             <h1>{this.props.link.title.charAt(0).toUpperCase() + this.props.link.title.slice(1)} are awesome!</h1>
             <h2>Come join Tim's World Wide Web!</h2>
             <NavLink to="/"><img src={logo}/></NavLink>
@@ -45,7 +46,11 @@ class LinkPage extends Component {
           </div>
         ):(
           <div>
-            {this.props.linkStatus == 404 ? (<h1>Ooops, 404!</h1>):(<div></div>)}
+            {this.props.getLinkErrorMessage ? (
+              <NotFoundPage.component />
+            ):(
+              <div></div>
+            )}
           </div>
         )}
       </div>
@@ -56,7 +61,7 @@ class LinkPage extends Component {
 function mapStateToProps(state) {
   return {
     link: state.links.link || false,
-    linkStatus: state.links.linkStatus || 201
+    getLinkErrorMessage: state.links.getLinkErrorMessage || false
   }
 }
 
