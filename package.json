@@ -42,7 +42,7 @@
     "react-router-config": "4.4.0-beta.6",
     "react-router-dom": "4.4.0-beta.6",
     "redux": "4.0.0",
-    "redux-form": "7.3.0",
+    "redux-form": "8.1.0",
     "redux-thunk": "2.3.0",
     "save-dev": "2.0.0",
     "serialize-javascript": "1.5.0",
