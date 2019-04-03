@@ -31,7 +31,7 @@ class Home extends Component {
     return (
       <div>
         {this.head()}
-        <div style={{width: "100%", display: "flex", justifyContent: "center", textAlign: "center"}}>
+        <div style={{marginBottom: "20px", width: "100%", display: "flex", justifyContent: "center", textAlign: "center"}}>
           <h1>Grow the web with referrals!</h1>
         </div>
         <LinkForm />

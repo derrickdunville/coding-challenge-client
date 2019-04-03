@@ -29,7 +29,6 @@ const renderTextField = ({
     margin="normal"
     placeholder={label}
     variant="outlined"
-    shrunk="true"
     inputProps={{
       ...input
     }}
@@ -54,10 +53,10 @@ class LinkForm extends Component {
     return(
       <form onSubmit={this.handleSubmit}>
         <div style={{display: "flex", alignItems: "flex-start", justifyContent: "center", width: "100%", height: "76px"}}>
-          <h4 style={{marginRight: "15px"}}>Add a Link:</h4>
+          <h4 style={{margin:"0 10px 0 15px", height: "56px", display: "flex", alignItems: "center"}}>Add a Link:</h4>
           <Field name="title" label="Title" component={renderTextField} type="text"/>
           <Button
-            style={{width: '100px', marginLeft: "15px", height: '56px'}}
+            style={{width: '100px', margin: "0 15px 0 10px", height: '56px'}}
             color="primary"
             variant="outlined"
             type="submit"
