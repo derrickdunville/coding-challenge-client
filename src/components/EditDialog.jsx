@@ -65,20 +65,9 @@ class EditDialog extends React.Component {
         >
           <DialogTitle id="form-dialog-title">Edit {this.props.link}</DialogTitle>
           <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="title"
-              label=""
-              type="text"
-              fullWidth
-              variant="outlined"
-              inputProps={{
-                name: 'title',
-                value: this.state.title,
-                onChange: this.handleChange
-              }}
-            />
+            <form onSubmit={this.handleSave}>
+              <Field name="title" label="Title" component={renderTextField} type="text"/>
+            </form>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.handleClose} color="secondary">
@@ -103,4 +92,16 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-export default connect(mapStateToProps, {putLink})(EditDialog)
+EditDialog = reduxForm({
+  form: 'editLink',
+  validate,
+  enableReinitialize: true
+})(EditDialog)
+
+EditDialog = connect(
+  mapStateToProps,
+  { putLink }
+)(EditDialog)
+
+
+export default EditDialog
