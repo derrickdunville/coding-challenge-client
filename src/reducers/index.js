@@ -17,6 +17,17 @@ export default combineReducers({
         default:
           return state;
       }
+    },
+    editLink: (state, action) => {
+      switch(action.type) {
+        case "PUT_LINK_FAIL":
+          return{
+            ...state,
+            asyncErrors: {title: action.payload.err.message} //<-- kind of a hack, but works
+          }
+        default:
+          return state;
+      }
     }
   })
 })

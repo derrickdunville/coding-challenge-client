@@ -14,11 +14,13 @@ import {
   PUT_LINK_FAIL,
   DELETE_LINK,
   DELETE_LINK_SUCCESS,
-  DELETE_LINK_FAIL
+  DELETE_LINK_FAIL,
+  TOGGLE_EDIT_OPEN
 } from '../constants/link-action-types'
 
 const initialState = {
   loaded: false,
+  editOpen: false,
   docs: []
 }
 
@@ -75,7 +77,6 @@ export default (state=initialState, action) => {
         ...state,
         gettingLink: false,
         getLinkErrorMessage: action.payload.err.message,
-        // linkStatus: action.payload.status
       }
     case CLEAR_LINK:
       let newState = {...state}
@@ -92,6 +93,7 @@ export default (state=initialState, action) => {
       return {
         ...state,
         puttingLink: false,
+        editOpen: false,
         docs: state.docs.map(link => (link._id === action.payload._id) ? action.payload : link)
       }
     case PUT_LINK_FAIL:
@@ -116,6 +118,11 @@ export default (state=initialState, action) => {
         ...state,
         deletingLink: false,
         deleteLinkErrorMessage: action.payload.err.message
+      }
+    case TOGGLE_EDIT_OPEN:
+      return {
+        ...state,
+        editOpen: !state.editOpen
       }
     default:
       return state

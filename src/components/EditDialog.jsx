@@ -8,44 +8,62 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { putLink } from '../actions/linkActions'
+import { Field, reduxForm, formValueSelector  } from 'redux-form'
+
+const alphaNumericUnderscoreRegex = new RegExp("^[a-zA-Z0-9_]+$")
+const selector = formValueSelector('editLink')
+
+const validate = values => {
+  const errors = {}
+  if (!values['title']) {
+    errors['title'] = 'Link title is required'
+  }
+  if (values.title && !alphaNumericUnderscoreRegex.test(values.title)) {
+    errors.title = 'Must contain only alphanumeric characters and underscores'
+  }
+  return errors
+}
+
+const renderTextField = ({
+  label,
+  type,
+  input,
+  meta: { touched, invalid, error },
+  ...custom
+}) => {
+  return(
+    <TextField
+      style={{marginTop: "0px", marginBottom: "0px"}}
+      label=""
+      margin="normal"
+      placeholder={label}
+      variant="outlined"
+      shrunk="true"
+      inputProps={{
+        ...input
+      }}
+      helperText={error}
+      error={invalid}
+    />
+  )
+}
+
 
 class EditDialog extends React.Component {
-  state = {
-    open: false,
-    title: this.props.link.title
+  handleSave = (event) => {
+    event.persist()
+    event.preventDefault()
+    this.props.handleSave(this.props.title)
   }
-
-  handleChange = (event) => {
-    if(event.target.name === 'title'){
-     this.setState({ title: event.target.value })
-    }
-  }
-
-  handleSave = () => {
-    this.props.putLink(this.props.link.title, this.state.title)
-    this.handleClose()
-  }
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  }
-
-  handleClose = () => {
-    this.setState({ open: false });
-  }
-
   render() {
     return (
       <div>
-        <Button color="default" onClick={this.handleClickOpen}>
-          Edit
-        </Button>
         <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.props.open}
+          onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Edit {this.props.link.title}</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit {this.props.link}</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -63,7 +81,7 @@ class EditDialog extends React.Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="secondary">
+            <Button onClick={this.props.handleClose} color="secondary">
               Cancel
             </Button>
             <Button onClick={this.handleSave} color="primary">
@@ -76,9 +94,12 @@ class EditDialog extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state, props) => {
   return {
-
+    initialValues: {
+      title: props.link
+    },
+    title: selector(state, 'title')
   }
 }
 
