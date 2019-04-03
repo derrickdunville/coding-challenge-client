@@ -34,7 +34,6 @@ export default (state=initialState, action) => {
         ...state,
         postingLink: false,
         docs: [action.payload, ...state.docs],
-        postLinkErrorMessage: false
       }
     case POST_LINK_FAIL:
       return {
