@@ -7,6 +7,7 @@ import expect from 'expect'
 
 const initialState = {
   loaded: false,
+  editOpen: false,
   docs: []
 }
 const mockData =
@@ -163,6 +164,7 @@ describe('links reducer', () => {
     ).toEqual({
       ...loadedState,
       puttingLink: false,
+      editOpen: false,
       docs: [...initialState.docs, {
         ...mockData[0],
         title: "updated"

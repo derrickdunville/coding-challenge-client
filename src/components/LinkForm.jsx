@@ -33,8 +33,8 @@ const renderTextField = ({
     inputProps={{
       ...input
     }}
-    helperText={touched && error}
-    error={touched && invalid}
+    helperText={error}
+    error={invalid}
   />
 )
 

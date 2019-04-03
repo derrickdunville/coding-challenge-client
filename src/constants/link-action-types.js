@@ -10,8 +10,6 @@ export const GET_LINK = "GET_LINK"
 export const GET_LINK_SUCCESS = "GET_LINK_SUCCESS"
 export const GET_LINK_FAIL = "GET_LINK_FAIL"
 
-export const CLEAR_LINK = "CLEAR_LINK"
-
 export const DELETE_LINK = "DELETE_LINK"
 export const DELETE_LINK_SUCCESS = "DELETE_LINK_SUCCESS"
 export const DELETE_LINK_FAIL = "DELETE_LINK_FAIL"
@@ -19,3 +17,6 @@ export const DELETE_LINK_FAIL = "DELETE_LINK_FAIL"
 export const PUT_LINK = "PUT_LINK"
 export const PUT_LINK_SUCCESS = "PUT_LINK_SUCCESS"
 export const PUT_LINK_FAIL = "PUT_LINK_FAIL"
+
+export const TOGGLE_EDIT_OPEN = "TOGGLE_EDIT_OPEN"
+export const CLEAR_LINK = "CLEAR_LINK"

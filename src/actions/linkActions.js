@@ -57,6 +57,10 @@ export const clearLink = () => async (dispatch, getState, api) => {
   dispatch({ type: types.CLEAR_LINK })
 }
 
+export const toggleEditOpen = () => async (dispatch, getState, api) => {
+  dispatch({type: types.TOGGLE_EDIT_OPEN})
+}
+
 export const putLink = (title, newTitle) => async (dispatch, getState, api) => {
   dispatch({
     type: types.PUT_LINK

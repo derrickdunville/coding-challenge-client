@@ -31,8 +31,6 @@ const renderTextField = ({
   meta: { touched, invalid, error },
   ...custom
 }) => {
-  console.log("input: ")
-  console.dir(input)
   return(
     <TextField
       style={{marginTop: "0px", marginBottom: "0px"}}
@@ -44,60 +42,35 @@ const renderTextField = ({
       inputProps={{
         ...input
       }}
-      helperText={touched && error}
-      error={touched && invalid}
+      helperText={error}
+      error={invalid}
     />
   )
 }
 
 
 class EditDialog extends React.Component {
-  state = {
-    open: false,
-    title: this.props.link.title
-  }
-  componentDidMount(){
-    console.log("component did mount")
-  }
-
   handleSave = (event) => {
     event.persist()
     event.preventDefault()
-    console.dir(this.props.title)
-    // this.props.putLink(this.props.link.title, this.state.title)
-    // this.handleClose()
+    this.props.handleSave(this.props.title)
   }
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  }
-
-  handleClose = () => {
-    this.setState({ open: false });
-  }
-
   render() {
-    const { title } = this.props
-    console.log("initialValues: ")
-    console.dir(this.props)
     return (
       <div>
-        <Button color="default" onClick={this.handleClickOpen}>
-          Edit
-        </Button>
         <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.props.open}
+          onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Edit {this.props.link.title}</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit {this.props.link}</DialogTitle>
           <DialogContent>
             <form onSubmit={this.handleSave}>
               <Field name="title" label="Title" component={renderTextField} type="text"/>
             </form>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="secondary">
+            <Button onClick={this.props.handleClose} color="secondary">
               Cancel
             </Button>
             <Button onClick={this.handleSave} color="primary">
@@ -111,10 +84,9 @@ class EditDialog extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  console.log("props.link.title: ", props.link.title)
   return {
     initialValues: {
-      title: props.link.title
+      title: props.link
     },
     title: selector(state, 'title')
   }

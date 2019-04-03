@@ -20,8 +20,6 @@ export default combineReducers({
     },
     editLink: (state, action) => {
       switch(action.type) {
-        case "PUT_LINK_SUCCESS":
-          return undefined;       // <--- blow away form data
         case "PUT_LINK_FAIL":
           return{
             ...state,
