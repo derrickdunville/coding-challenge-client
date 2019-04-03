@@ -10,10 +10,6 @@ const selector = formValueSelector('link')
 
 const validate = values => {
   const errors = {}
-  // const requiredFields = ['title']
-  // requiredFields.forEach(field => {
-  //   if (!values[field]) { errors[field] = 'Required' }
-  // })
   if (values.title && !alphaNumericUnderscoreRegex.test(values.title)) {
     errors.title = 'Must contain only alphanumeric characters and underscores'
   }
@@ -21,17 +17,14 @@ const validate = values => {
 }
 
 const renderTextField = ({
-  name,
   label,
   type,
   input,
-  onChange,
-  meta: { touched, invalid, error},
+  meta: { touched, invalid, error },
   ...custom
 }) => (
   <TextField
     style={{marginTop: "0px", marginBottom: "0px"}}
-    id="standard-name"
     label=""
     margin="normal"
     placeholder={label}
@@ -50,33 +43,29 @@ class LinkForm extends Component {
     super(props);
   }
 
-
   handleSubmit = (event) => {
     event.persist()
     event.preventDefault()
-    this.props.postLink({title: this.props.title})
+    this.props.postLink({title: this.props.title || ""})
   }
 
   render(){
-    console.log("rendering form")
     const { classes } = this.props;
     return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div style={{display: "flex", alignItems: "flex-start", justifyContent: "center", width: "100%", height: "76px"}}>
-            <h4 style={{marginRight: "15px"}}>Add a Link:</h4>
-            <Field name="title" label="Title" component={renderTextField} type="text"/>
-            <Button
-              style={{width: '100px', marginLeft: "15px", height: '56px'}}
-              color="primary"
-              variant="outlined"
-              onClick={this.handleSubmit}
-              >
-              Add
-            </Button>
-          </div>
-        </form>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <div style={{display: "flex", alignItems: "flex-start", justifyContent: "center", width: "100%", height: "76px"}}>
+          <h4 style={{marginRight: "15px"}}>Add a Link:</h4>
+          <Field name="title" label="Title" component={renderTextField} type="text"/>
+          <Button
+            style={{width: '100px', marginLeft: "15px", height: '56px'}}
+            color="primary"
+            variant="outlined"
+            type="submit"
+            >
+            Add
+          </Button>
+        </div>
+      </form>
     )
   }
 }
@@ -89,7 +78,7 @@ function mapStateToProps(state) {
 
 LinkForm = connect(
   mapStateToProps,
-  {postLink}
+  { postLink }
 )(LinkForm)
 
 export default reduxForm({
