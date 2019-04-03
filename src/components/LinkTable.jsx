@@ -42,10 +42,10 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-  { id: 'title', numeric: false, disablePadding: false, label: 'Link Title', sortable: true },
-  { id: 'clicks', numeric: true, disablePadding: false, label: 'Clicks', sortable: true },
-  { id: 'edit', numeric: true, disablePadding: false, label: 'Edit', sortable: false },
-  { id: 'delete', numeric: true, disablePadding: false, label: 'Delete', sortable: false }
+  { id: 'title', numeric: false, disablePadding: false, label: 'Link Title', sortable: true, align: "left"},
+  { id: 'clicks', numeric: true, disablePadding: false, label: 'Clicks', sortable: true, align: "center" },
+  { id: 'edit', numeric: true, disablePadding: false, label: 'Edit', sortable: false, align: "center" },
+  { id: 'delete', numeric: true, disablePadding: false, label: 'Delete', sortable: false, align: "center" }
 ]
 
 class EnhancedTableHead extends React.Component {
@@ -54,15 +54,16 @@ class EnhancedTableHead extends React.Component {
   }
 
   render() {
-    const { order, orderBy } = this.props
+    const { order, orderBy, classes } = this.props
     return (
       <TableHead>
         <TableRow>
           {rows.map(
             row => (
               <TableCell
+                className={row.id === 'title' ? classes.tableCellFirst : classes.tableCell}
                 key={row.id}
-                align={row.numeric ? 'right' : 'left'}
+                align={row.align}
                 padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
@@ -84,6 +85,7 @@ class EnhancedTableHead extends React.Component {
                   <TableSortLabel
                     active={orderBy === row.id}
                     direction={order}
+                    hideSortIcon={true}
                   >
                     {row.label}
                   </TableSortLabel>
@@ -104,17 +106,43 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 }
 
+const StyledTableHead = withStyles(() => ({
+  tableCell: {
+    padding: "6px",
+    '&:last-child':{
+      paddingRight: "18px"
+    }
+  },
+  tableCellFirst: {
+    padding: "6px",
+    paddingLeft: "18px",
+    minWidth: "73px"
+  },
+}))(EnhancedTableHead)
+
 const styles = theme => ({
   root: {
+    width: '100%',
     maxWidth: '600px',
     marginTop: theme.spacing.unit * 3,
   },
   table: {
-    maxWidth: "600px"
+    width: "100%",
+    maxWidth: '600px'
   },
   tableWrapper: {
     overflowX: 'auto',
   },
+  tableCell: {
+    padding: "6px",
+    '&:last-child':{
+      paddingRight: "18px"
+    }
+  },
+  tableCellFirst: {
+    padding: "6px",
+    paddingLeft: "18px"
+  }
 })
 
 class EnhancedTable extends React.Component {
@@ -164,7 +192,7 @@ class EnhancedTable extends React.Component {
         <Paper className={classes.root}>
           <div className={classes.tableWrapper}>
             <Table className={classes.table} aria-labelledby="tableTitle">
-              <EnhancedTableHead
+              <StyledTableHead
                 order={order}
                 orderBy={orderBy}
                 onRequestSort={this.handleRequestSort}
@@ -177,7 +205,7 @@ class EnhancedTable extends React.Component {
                         tabIndex={-1}
                         key={n._id}
                       >
-                        <TableCell component="th" scope="row" padding="default">
+                        <TableCell className={classes.tableCellFirst} component="th" scope="row" padding="none">
                           <NavLink
                             to={`/${n.title}`}
                             key={n._id}
@@ -185,13 +213,13 @@ class EnhancedTable extends React.Component {
                             {n.title}
                           </NavLink>
                         </TableCell>
-                        <TableCell align="right">{n.clicks}</TableCell>
-                        <TableCell align="right">
+                        <TableCell className={classes.tableCell} align="center">{n.clicks}</TableCell>
+                        <TableCell className={classes.tableCell} align="center">
                           <Button color="default" id={n._id} title={n.title} onClick={this.handleOpenEdit}>
                             Edit
                           </Button>
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell className={classes.tableCell} align="center">
                           <Button color="secondary" id={n.id} title={n.title} onClick={this.handleDeleteLink}>
                             Delete
                           </Button>
